@@ -18,9 +18,9 @@ class TestQuestionPage:
         ])
     def test_get_question(self, driver: WebDriver, main_page, index_question, text):
         main_page = MainPageScooter(driver)
-
+        # Нажатие на кпоку cookie
         main_page.click_cookie()
-
+        # Раскрытие вопроса
         main_page.click_question_button(index_question)
-
+        # Проверка ответа на вопрос
         main_page.check_question(index_question, text)

@@ -14,12 +14,13 @@ class RentPage:
     submit_order_button = (By.XPATH, ".//button[text()='Заказать' and @class='Button_Button__ra12g Button_Middle__1CSJM']")
     yes_button = (By.XPATH, ".//button[text()='Да' and @class='Button_Button__ra12g Button_Middle__1CSJM']")
     description_confirm_order = (By.CLASS_NAME, "Order_ModalHeader__3FDaJ")
+    status_button = (By.XPATH, ".//button[text()='Посмотреть статус']")
 
     def __init__(self, driver: WebDriver):
         self.driver = driver
     
     @allure.step('Проверить переход на форму "Про аренд"')
-    def ckeck_rent_page(self):
+    def check_rent_page(self):
         WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(self.description_rent_window))
         assert self.driver.find_element(*self.description_rent_window).text == "Про аренду"
 
@@ -44,6 +45,14 @@ class RentPage:
     def input_comment(self, comment):
         self.driver.find_element(*self.comment_field).send_keys(comment)
 
+    @allure.step('Заполнение формы про аренду')
+    def input_rent_form(self, color_name, comment):
+        self.check_rent_page()
+        self.select_date()
+        self.select_duration()
+        self.select_color(color_name)
+        self.input_comment(comment)
+
     @allure.step('Нажать на кнопку "Заказать"')
     def click_submit_button(self):
         self.driver.find_element(*self.submit_order_button).click()
@@ -56,4 +65,6 @@ class RentPage:
     def check_order(self):
         assert WebDriverWait(self.driver, 10).until(expected_conditions.text_to_be_present_in_element(self.description_confirm_order, "Заказ оформлен"))
 
-    
+    @allure.step('Нажать на кнопку "Посмотреть статус"')
+    def click_show_order_button(self):
+        self.driver.find_element(*self.status_button).click()

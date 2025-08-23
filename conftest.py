@@ -17,4 +17,5 @@ def driver():
 
 @pytest.fixture(scope='function')
 def main_page(driver: WebDriver):
+    # открыть главную страницу
     driver.get("https://qa-scooter.praktikum-services.ru/")

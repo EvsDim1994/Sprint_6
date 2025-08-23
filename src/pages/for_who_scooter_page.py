@@ -46,6 +46,15 @@ class ForWhoScooterPage:
     def input_phone(self, phone):
         self.driver.find_element(*self.phone_field).send_keys(phone)
 
+    @allure.step('Заполнение формы "Для кого самокат"')
+    def input_for_who_scooter_form(self, name, surname, adress, phone):
+        self.check_for_who_scotter_page()
+        self.input_name(name)
+        self.input_surname(surname)
+        self.input_adress(adress)
+        self.select_station()
+        self.input_phone(phone)
+
     @allure.step('Нажатие на кнопку "Далее')
     def click_next_page_button(self):
         self.driver.find_element(*self.next_button).click()
