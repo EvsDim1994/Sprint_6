@@ -1,7 +1,8 @@
-import allure
 import pytest
 from selenium import webdriver
 from selenium.webdriver.remote.webdriver import WebDriver
+
+from src.config import Config
 
 
 
@@ -18,4 +19,4 @@ def driver():
 @pytest.fixture(scope='function')
 def main_page(driver: WebDriver):
     # открыть главную страницу
-    driver.get("https://qa-scooter.praktikum-services.ru/")
+    driver.get(Config.URL)
